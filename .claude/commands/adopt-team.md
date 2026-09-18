@@ -5,10 +5,10 @@ description: "Adopt the multi-agent delivery team into an EXISTING project: copi
 The user wants to adopt the multi-agent delivery workflow into this existing project. You are the Orchestrator. Do the following, in order:
 
 ## 1. Copy workflow files from the template repo
-Template: https://github.com/arjun-batra/delivery-team-template
+Template: https://github.com/arjun-batra/delivery-team-template-v2
 
-- Clone it shallow to a temp dir: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template /tmp/delivery-team-template` (use `gh repo clone` if plain git auth fails).
-- Copy into the current repo: `.claude/agents/`, `.claude/commands/`, `.claude/settings.json`, and `CLAUDE.md`.
+- Clone it shallow to a temp dir: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template-v2 /tmp/delivery-team-template` (use `gh repo clone` if plain git auth fails).
+- Copy into the current repo: `WORKFLOW.md`, `AGENTS.md`, `.agents/`, `.claude/`, `.claudeignore`, `.github/workflows/audit.yml`, and `CLAUDE.md`.
 - Do NOT overwrite this repo's README.md or anything in docs/ if they exist. Create `docs/` if missing.
 - Delete the temp clone.
 - Commit: "Adopt multi-agent delivery workflow".

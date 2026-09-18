@@ -13,7 +13,7 @@ You are the Orchestrator. Run a retrospective on THIS project's delivery process
 
 ## 2. Write docs/retro.md
 3-5 findings max, each evidence-linked (cite the doc/log entry or commit). For each finding, include one of:
-- **PROPOSED TEMPLATE EDIT** — the exact file and rule change in the `delivery-team-template` repo that would prevent recurrence, or
+- **PROPOSED TEMPLATE EDIT** — the exact file and rule change in the `delivery-team-template-v2` repo that would prevent recurrence, or
 - **"project-specific, no template change"** if the friction is unique to this project.
 
 ## 3. Discuss with the user
@@ -21,7 +21,7 @@ Present the findings and proposed edits. The user approves which proposals to ap
 
 ## 4. Apply approved template edits
 For each approved proposal:
-1. Clone the template shallow: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template /tmp/delivery-team-template-retro`.
+1. Clone the template shallow: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template-v2 /tmp/delivery-team-template-retro`.
 2. Apply the edit in the clone.
 3. Bump `VERSION` and add a `CHANGELOG.md` entry (1-3 lines) — no silent template edits, per the template's own versioning rule.
 4. Commit and push the clone directly (or hand the diff to the user if you lack push access).

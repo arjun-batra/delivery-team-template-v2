@@ -2,6 +2,9 @@
 
 All notable changes to the delivery-team-template are recorded here. Any template change bumps `VERSION` and adds an entry here — no silent template edits.
 
+## v2.0.0
+Split the delivery process into provider-neutral `WORKFLOW.md` and separate Claude Code/Codex adapters. Added root `AGENTS.md` and a repository-scoped Codex delivery skill, removed automatic `git push` approval, and made the template safe to evolve without duplicating the workflow in bootstrapping commands.
+
 ## v1.7
 pm, tech-lead, and lite-mode `lead` now route to model opus instead of sonnet (discovery/requirements and architecture/design work benefit from the extra reasoning depth); designer/dev/qa/reviewer stay sonnet, release stays haiku. Updated `.claude/agents/{pm,tech-lead,lead}.md` frontmatter, `.claude/orchestrator-checklist.md`'s reference table and example calls, and CLAUDE.md's orchestrator model-enforcement rule and lite-mode note.
 

@@ -1,3 +1,7 @@
+# Claude Code Delivery Adapter
+
+Read `WORKFLOW.md` first. It is the provider-neutral source of truth and overrides any conflicting adapter instruction below. This file only supplies Claude-specific role and command details.
+
 # Multi-Agent Delivery Workflow
 
 Orchestrator (main thread) routes work to subagents and enforces the pipeline; never does the work itself. User is the stakeholder — trade-offs go to them via pm, never decided silently.

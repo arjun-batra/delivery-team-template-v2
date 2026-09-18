@@ -1,45 +1,26 @@
-# Delivery Team — Project Template
+# Delivery Team Template v2
 
-New project = new repo from this template. The multi-agent team (.claude/agents/),
-workflow (CLAUDE.md), and git permissions (.claude/settings.json) travel with the repo —
-so all commands work in any Claude Code session: Desktop, terminal, web, or mobile.
+A reusable, provider-neutral delivery workflow for projects built with **Claude Code** or **ChatGPT Codex**. Use GitHub’s **Use this template** button to start a new repository; the project inherits the workflow and both adapters.
 
-## Start a project
-1. GitHub -> "Use this template" -> create your new repo
-2. Open it in Claude Code (Desktop Code session on a clone, or Claude Code on the web — no local folder needed)
-3. Type: /spin-up-team <your idea>
-4. Answer PM's discovery questions; approve at the gates
+## What travels with a new project
 
-## Resume work (fresh session, any device)
-Open a Claude Code session in the repo and type: /resume-work
-It reconstructs state from docs/ and git history, tells you exactly where things stand,
-and continues the pipeline from that point after you confirm.
+- `WORKFLOW.md` — the canonical delivery policy: roles, durable artifacts, user gates, verification, and release rules.
+- `AGENTS.md` and `.agents/skills/delivery-team/` — the Codex adapter.
+- `CLAUDE.md` and `.claude/` — the Claude Code adapter and existing slash commands.
+- `.github/workflows/audit.yml` — a portable starter audit.
 
-## Adopt into an EXISTING project
-- Repo already has .claude/commands/adopt-team.md (template-born or previously adopted): type /adopt-team
-- Machine with the user-level install: /adopt-team works in any repo
-- First-time adoption from web/mobile (no command available anywhere): paste this bootstrap prompt:
+## Start with Codex
 
-  "Clone https://github.com/arjun-batra/delivery-team-template (shallow) to a temp dir, read
-  .claude/commands/adopt-team.md from it, and follow those instructions exactly in this repo."
+Open the generated repository in Codex and say: “Use the delivery-team workflow to start a project: _[idea]_.” Codex reads `AGENTS.md`; the delivery-team skill gives it the reusable procedure. See [the Codex adapter](adapters/codex/README.md).
 
-After the first adoption the commands live in the repo, so every later session on any device has them.
+## Start with Claude Code
 
-## Git behavior (built into CLAUDE.md)
-- Branch per increment; every merge to main is a shippable end-to-end feature
-- Commit when QA passes, merge when reviewer clears, release tag at closure
+Open the generated repository in Claude Code and run `/spin-up-team <idea>`. See [the Claude adapter](adapters/claude/README.md).
 
-## Change requests
-Open a Claude Code session in the repo: "Change request: <what you want>"
-PM assesses -> requirements updated -> design updated -> loop resumes.
+## Working principles
 
-## Retrospectives and template versioning
-- At Phase 4 closure (or on demand), run `/retro`: it mines this project's docs/git history for delivery friction and proposes template edits — see `docs/retro.md` after running.
-- Any template change bumps `VERSION` and adds a `CHANGELOG.md` entry — no silent template edits.
-- `/sync-team` reports "synced from vX -> vY" with the relevant CHANGELOG entries, and records the new version in `.claude/template-version`.
+The workflow is artifact-driven: requirements, design, increment status, test evidence, review findings, and runbooks live in `docs/`, not in transient chat. The user approves discovery, requirements, and design before implementation. Each merge is an end-to-end vertical slice.
 
-## Token efficiency
-- Run the main session on Sonnet; escalate to Opus manually only for individual hard design decisions.
-- One increment per session: end the session and use /resume-work fresh next time.
-- Prefer /clear + /resume-work over /compact — compaction is itself a large paid summarization and lossier than the docs.
-- Use /usage to monitor spend.
+## Safety and maintenance
+
+The template never pre-approves `git push`. Agents must seek current approval for pushes, merges, deployments, and other external side effects. Update `WORKFLOW.md` before changing either adapter, bump `VERSION`, and record the change in `CHANGELOG.md`.
