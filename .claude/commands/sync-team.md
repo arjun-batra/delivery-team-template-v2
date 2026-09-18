@@ -5,10 +5,10 @@ description: "Sync this repo's workflow files from the delivery-team-template. U
 You are the Orchestrator. Update THIS repo's workflow files from the upstream template, leaving project content untouched.
 
 ## 1. Fetch the template
-Clone shallow to a temp dir: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template /tmp/delivery-team-template-sync` (use `gh repo clone` if plain git auth fails).
+Clone shallow to a temp dir: `git clone --depth 1 https://github.com/arjun-batra/delivery-team-template-v2 /tmp/delivery-team-template-sync` (use `gh repo clone` if plain git auth fails).
 
 ## 2. Overwrite workflow files only
-Copy from the temp clone into this repo, overwriting: `.claude/agents/`, `.claude/commands/`, `.claude/settings.json`, `CLAUDE.md`, `.claudeignore`, `.github/workflows/audit.yml`.
+Copy from the temp clone into this repo, overwriting: `WORKFLOW.md`, `AGENTS.md`, `.agents/`, `.claude/`, `.claudeignore`, `.github/workflows/audit.yml`.
 NEVER touch `README.md`, `docs/`, `src/`, `tests/` — those are this project's own content, not template scaffolding.
 
 ## 3. Report the version jump
