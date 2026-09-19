@@ -2,6 +2,10 @@
 
 All notable changes to the delivery-team-template are recorded here. Any template change bumps `VERSION` and adds an entry here — no silent template edits.
 
+## v2.1.1
+
+Aligned Claude `/adopt-team` and `/sync-team` with their Codex equivalents: platform-neutral temporary workspaces, diff previews, protected project content, and approval before applying or committing changes.
+
 ## v2.1.0
 
 Added same-name Codex skills for every Claude delivery command (`$spin-up-team`, `$adopt-team`, `$resume-work`, `$sync-team`, `$retro`, and `$big-guns`). Consolidated provider-neutral policy in `WORKFLOW.md`, added a compact delivery-state navigation index, template structural audit, safer CI defaults, and parity documentation.
