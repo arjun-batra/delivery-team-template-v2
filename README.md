@@ -10,12 +10,13 @@ A reusable, provider-neutral delivery workflow for projects built with **Claude 
 - `docs/delivery-state.md` — compact navigation for a fresh session; authoritative facts remain in their owned artifacts.
 - `.github/workflows/audit.yml` and `scripts/audit_template.py` — template and project checks.
 
-## Start a project
+## Start or migrate a project
 
 | Operation | Claude Code | ChatGPT Codex |
 |---|---|---|
 | New project | `/spin-up-team <idea>` | `$spin-up-team <idea>` |
 | Adopt an existing project | `/adopt-team` | `$adopt-team` |
+| Migrate an existing v1 project | `/migrate-v1` | `$migrate-v1` |
 | Resume work | `/resume-work` | `$resume-work` |
 | Sync workflow updates | `/sync-team` | `$sync-team` |
 | Retrospective | `/retro` | `$retro` |

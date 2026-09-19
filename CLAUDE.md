@@ -26,6 +26,7 @@ Claude commands and Codex skills provide the same user-facing delivery operation
 |---|---|
 | `/spin-up-team` | `$spin-up-team` |
 | `/adopt-team` | `$adopt-team` |
+| `/migrate-v1` | `$migrate-v1` |
 | `/resume-work` | `$resume-work` |
 | `/sync-team` | `$sync-team` |
 | `/retro` | `$retro` |

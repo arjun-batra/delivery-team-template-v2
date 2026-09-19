@@ -14,4 +14,4 @@ Read `WORKFLOW.md` before working. It is the shared, provider-neutral contract.
 
 ## Codex skills
 
-Repository skills live in `.agents/skills/`. Use `$spin-up-team`, `$adopt-team`, `$resume-work`, `$sync-team`, `$retro`, or `$big-guns` for the named delivery operations. Use `$delivery-team` for general workflow routing.
+Repository skills live in `.agents/skills/`. Use `$spin-up-team`, `$adopt-team`, `$migrate-v1`, `$resume-work`, `$sync-team`, `$retro`, or `$big-guns` for the named delivery operations. Use `$delivery-team` for general workflow routing.

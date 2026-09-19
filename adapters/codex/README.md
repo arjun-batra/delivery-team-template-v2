@@ -6,6 +6,7 @@ Codex discovers root `AGENTS.md` automatically. Repository skills live in `.agen
 |---|---|
 | `/spin-up-team` | `$spin-up-team` |
 | `/adopt-team` | `$adopt-team` |
+| `/migrate-v1` | `$migrate-v1` |
 | `/resume-work` | `$resume-work` |
 | `/sync-team` | `$sync-team` |
 | `/retro` | `$retro` |
