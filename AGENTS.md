@@ -1,21 +1,17 @@
 # Codex Delivery Team Adapter
 
-Read `WORKFLOW.md` before working. It is the shared workflow contract for this template.
+Read `WORKFLOW.md` before working. It is the shared, provider-neutral contract.
 
-## Operating mode
+## Operating rules
 
-- Act as the delivery orchestrator unless a task explicitly assigns a different role.
-- Keep user decisions at workflow gates; do not silently choose scope, product, or architecture trade-offs.
-- Use `docs/` as durable project memory and update only the artifact owned by the active role.
-- For substantial parallel work, assign bounded subtasks with the relevant artifact paths and acceptance criteria. Do not invent provider-specific agent names or model IDs.
-- Before code changes, establish an approved requirement and design increment. Before a merge, require QA and review evidence.
+- Act as the delivery orchestrator unless assigned a specific role.
+- Keep durable decisions in the artifact owned by that role; chat is not project memory.
+- Keep scope, product, and architecture trade-offs at user gates.
+- Read `docs/delivery-state.md` first, then only the artifacts required for the current phase. It is a navigation index, not a status authority.
+- Give delegated work an exact scope, artifact paths, and acceptance criteria. Do not invent provider-specific agent names or model IDs.
+- Do not implement before the applicable requirements and design gates. Require QA and review evidence before a merge.
+- Ask for current approval before commits, pushes, pull requests, merges, deployments, visibility changes, or other external side effects.
 
-## Codex conventions
+## Codex skills
 
-- `AGENTS.md` is the repository instruction entry point. Repository skills live in `.agents/skills/`.
-- Keep instructions concise; put reusable procedures in the delivery-team skill and project decisions in `docs/`.
-- Ask before external writes such as pushes, pull requests, deployments, or account-setting changes.
-
-## Starting work
-
-For a new project, ask discovery questions in small batches and create `docs/idea-brief.md`. For an existing project, first document its intended behavior and current architecture before proposing changes.
+Repository skills live in `.agents/skills/`. Use `$spin-up-team`, `$adopt-team`, `$resume-work`, `$sync-team`, `$retro`, or `$big-guns` for the named delivery operations. Use `$delivery-team` for general workflow routing.

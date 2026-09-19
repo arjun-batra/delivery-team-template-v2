@@ -1,17 +1,12 @@
 ---
 name: delivery-team
-description: Run a gated, artifact-driven software delivery workflow for a new project, an existing project, a change request, or project closure.
+description: Route a project through the gated, artifact-driven delivery workflow when no named delivery operation is a better fit.
 ---
 
-# Delivery Team Skill
+# Delivery Team
 
-Read `WORKFLOW.md` and `AGENTS.md` before acting.
+Read `AGENTS.md`, `WORKFLOW.md`, and `docs/delivery-state.md` if it exists.
 
-## Routes
+Select the route that matches the request: new project, existing-project adoption, change request, increment work, or closure. Use the named skill when the request is specifically to start, adopt, resume, sync, retrospect, or deep-review.
 
-- **New project:** discovery → user gate → requirements → user gate → design/increment plan → user gate → increment loop.
-- **Existing project:** reverse-document intended requirements and as-built design; establish a QA baseline; present debt for the user to triage before refactoring.
-- **Change request:** update requirements, assess design/increment impact, obtain any needed approval, then resume the increment loop.
-- **Closure:** perform the workflow closure checks and write a short retrospective.
-
-Use focused role briefs that name exact files and acceptance criteria. Do not use this skill to bypass user gates or external-action approval.
+Read only phase-relevant artifacts. Preserve user gates and request approval immediately before an external side effect.

@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -11,6 +14,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python for template audit
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate template structure
+        run: python scripts/audit_template.py
 
       - name: gitleaks (secrets scan)
         uses: gitleaks/gitleaks-action@v2
@@ -26,12 +37,23 @@ jobs:
           if [ -f package.json ]; then
             echo "node=true" >> "$GITHUB_OUTPUT"
           fi
+          if [ -f package-lock.json ]; then
+            echo "node_lock=npm" >> "$GITHUB_OUTPUT"
+          elif [ -f pnpm-lock.yaml ]; then
+            echo "node_lock=pnpm" >> "$GITHUB_OUTPUT"
+          elif [ -f yarn.lock ]; then
+            echo "node_lock=yarn" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Set up Python
         if: steps.detect.outputs.python == 'true'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
+
+      - name: Install Python project dependencies
+        if: steps.detect.outputs.python == 'true' && hashFiles('requirements.txt') != ''
+        run: pip install -r requirements.txt
 
       - name: Ruff lint (if configured)
         if: steps.detect.outputs.python == 'true'
@@ -55,38 +77,35 @@ jobs:
           fi
 
       - name: Python tests (if present)
-        if: steps.detect.outputs.python == 'true'
+        if: steps.detect.outputs.python == 'true' && hashFiles('tests/**') != ''
         run: |
-          if [ -d tests ]; then
-            pip install -r requirements.txt 2>/dev/null || pip install -e . 2>/dev/null || true
-            pip install pytest
-            pytest -q --tb=short
-          else
-            echo "No tests/ directory found, skipping tests."
-          fi
+          pip install pytest
+          pytest -q --tb=short
 
       - name: Set up Node
         if: steps.detect.outputs.node == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
+
+      - name: Install Node dependencies
+        if: steps.detect.outputs.node == 'true' && steps.detect.outputs.node_lock != ''
+        run: |
+          case "${{ steps.detect.outputs.node_lock }}" in
+            npm) npm ci ;;
+            pnpm) corepack enable && pnpm install --frozen-lockfile ;;
+            yarn) corepack enable && yarn install --immutable ;;
+          esac
 
       - name: ESLint (if configured)
-        if: steps.detect.outputs.node == 'true'
+        if: steps.detect.outputs.node == 'true' && steps.detect.outputs.node_lock != ''
         run: |
           if [ -f .eslintrc.json ] || [ -f .eslintrc.js ] || [ -f .eslintrc.cjs ] || [ -f eslint.config.js ] || [ -f eslint.config.mjs ]; then
-            npm ci
             npx eslint .
           else
-            echo "No eslint config found, skipping lint."
+            echo "No ESLint config found, skipping lint."
           fi
 
       - name: Node tests (if present)
-        if: steps.detect.outputs.node == 'true'
-        run: |
-          if [ -d tests ] || [ -d test ] || [ -d __tests__ ]; then
-            npm ci
-            npm test --if-present
-          else
-            echo "No test directory found, skipping tests."
-          fi
+        if: steps.detect.outputs.node == 'true' && steps.detect.outputs.node_lock != ''
+        run: npm test --if-present
