@@ -1,0 +1,7 @@
+name = "delivery-fast"
+description = "Routine lookup, known checks, and mechanical edits with clear acceptance."
+model = "gpt-5.6-luna"
+model_reasoning_effort = "low"
+developer_instructions = """
+Follow delivery/worker.md and the shared role procedure supplied in the task brief. This is the fast execution tier; model escalation is coordinated by the parent.
+"""

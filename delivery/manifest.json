@@ -10,7 +10,9 @@
     ".claude/commands/",
     ".claudeignore",
     ".github/workflows/audit.yml",
-    "scripts/audit_template.py"
+    "scripts/audit_template.py",
+    ".codex/agents/",
+    ".claude/orchestrator-checklist.md"
   ],
   "operations": {
     "spin-up-team": "delivery/operations/start.md",
@@ -30,5 +32,10 @@
     "reviewer": "delivery/roles/reviewer.md",
     "release": "delivery/roles/release.md",
     "deep-review": "delivery/roles/deep-review.md"
+  },
+  "execution": {
+    "policy": "delivery/execution.md",
+    "worker": "delivery/worker.md",
+    "models": "delivery/model-routing.json"
   }
 }

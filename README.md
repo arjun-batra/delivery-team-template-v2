@@ -5,6 +5,8 @@ A reusable, provider-neutral delivery workflow for projects built with **Claude 
 ## What travels with a new project
 
 - `WORKFLOW.md` — canonical policy for roles, artifacts, gates, verification, and approvals.
+- `delivery/` — shared role/operation procedures, documentation standard, and execution policy.
+- `.codex/agents/` — native Codex model-tier profiles.
 - `AGENTS.md` and `.agents/skills/` — the ChatGPT Codex adapter.
 - `CLAUDE.md` and `.claude/` — the Claude Code adapter.
 - `docs/delivery-state.md` — compact navigation for a fresh session; authoritative facts remain in their owned artifacts.
@@ -29,6 +31,12 @@ See [the Codex adapter](adapters/codex/README.md) and [the Claude adapter](adapt
 The workflow is artifact-driven: requirements, design, increment status, test evidence, review findings, and runbooks live in `docs/`, not transient chat. The user approves discovery, requirements, and design before implementation. Each merge is an end-to-end vertical slice.
 
 Documentation stays concise and human-readable through the [shared documentation standard](delivery/documentation.md). Each role refreshes affected artifacts on every pass; each increment closes with an automatic documentation reconciliation and reviewer check.
+
+## Efficient execution
+
+One coordinator is the default. It selects fast, standard, or deep workers for the task using the [execution policy](delivery/execution.md) and [model map](delivery/model-routing.json), with compact handoffs and evidence reuse. Native profiles configure model selection for Claude Code and compatible Codex subagent runtimes. Plain ChatGPT chats or runtimes without these controls cannot enforce automatic switching; account overrides can also change the model. The shared workflow still applies.
+
+Models are tunable defaults. Compare total usage, rework, latency, and quality before claiming savings. Configuration audits verify structure, not live model availability or model behavior. Python 3.11+ is required for the audit.
 
 ## Safety and maintenance
 

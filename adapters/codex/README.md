@@ -1,17 +1,9 @@
 # ChatGPT Codex adapter
 
-Codex discovers root `AGENTS.md` automatically. Repository skills live in `.agents/skills/` and provide the same named delivery operations as Claude commands.
+Repository skills in `.agents/skills/` preserve the [same operation names](../../README.md#start-or-migrate-a-project) with `$` replacing Claude's `/`. Use `$delivery-team` for general routing.
 
-| Claude Code | ChatGPT Codex |
-|---|---|
-| `/spin-up-team` | `$spin-up-team` |
-| `/adopt-team` | `$adopt-team` |
-| `/migrate-v1` | `$migrate-v1` |
-| `/resume-work` | `$resume-work` |
-| `/sync-team` | `$sync-team` |
-| `/retro` | `$retro` |
-| `/big-guns` | `$big-guns` |
+The coordinator follows `delivery/execution.md`. Native standalone profiles in `.codex/agents/` bind the fast, standard, and deep workers to the models in `delivery/model-routing.json`. Pass a shared role path and compact task brief; changing tier means selecting another profile for the remaining work. No global configuration or permission changes are required.
 
-Use `$delivery-team` for general routing. Skills preserve the shared workflow, artifacts, user gates, and approval rules while leaving task creation, models, worktrees, and permissions to the active Codex environment.
+This requires a Codex runtime supporting standalone custom-agent TOML files and access to the selected models. Reload/restart if profiles are not discovered. Profile model/effort settings take precedence over spawn defaults. Verify runtime metadata where possible; report missing controls and use the capable current model instead of claiming a switch. These files do not change a plain ChatGPT chat's model or the user's main-session model.
 
-A skill is discovered from `.agents/skills/`; restart Codex if newly added skills do not appear.
+Configuration format: [official Codex subagent documentation](https://developers.openai.com/es-419/docs/agent-configuration/subagents).

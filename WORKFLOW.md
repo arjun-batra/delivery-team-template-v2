@@ -16,6 +16,10 @@ This is the provider-neutral contract. Runtime adapters may add provider mechani
 
 Read `docs/delivery-state.md` first. It is a navigation index; `docs/design/increment-plan.md` is the sole increment-status source. Decisions belong in their owner artifact.
 
+## Execution
+
+The coordinator follows `delivery/execution.md`: use the fewest useful workers and automatically select an appropriate model tier for each task. Shared role responsibilities and quality gates apply at every tier. Runtime profiles are configuration, not evidence of actual model use.
+
 ## Gates
 
 1. **Discovery:** establish users, outcome, scope, constraints, risks, and product/tool classification; obtain approval.
@@ -35,6 +39,6 @@ Follow `delivery/documentation.md` whenever creating or changing delivery artifa
 - QA reports PASS or files bugs; after three fix cycles, escalate to the technical lead.
 - Keep configuration out of source. For LLM work, prompts and model parameters are configuration.
 - UI, accessibility, layout, editability, migrations, IaC, and deployment claims need appropriate live-artifact evidence.
-- Before ready, run configured CI-equivalent checks, the full suite, and a real-entry-point smoke test.
+- Before ready, verify configured CI-equivalent checks, the full suite, and a real-entry-point smoke test. Reuse valid evidence for the same revision, configuration, and environment; rerun affected checks after changes.
 - Keep active artifacts concise: current QA result/open bugs and open reviewer findings only. Archive resolved material outside ordinary task context.
 - Commit code and changed documentation together after QA passes. Ask for current approval before commit, push, PR, merge, tag, deployment, visibility change, or another external side effect.
