@@ -1,17 +1,9 @@
-# Codex Delivery Team Adapter
+# Codex delivery-team adapter
 
-Read `WORKFLOW.md` before working. It is the shared, provider-neutral contract.
+Read `WORKFLOW.md` and `delivery/manifest.json` before delivery work. They are the provider-neutral source; load only the role or operation procedure needed for the current phase.
 
-## Operating rules
+Use `$spin-up-team`, `$adopt-team`, `$migrate-v1`, `$resume-work`, `$sync-team`, `$retro`, or `$big-guns` for named operations. Use `$delivery-team` to route general work.
 
-- Act as the delivery orchestrator unless assigned a specific role.
-- Keep durable decisions in the artifact owned by that role; chat is not project memory.
-- Keep scope, product, and architecture trade-offs at user gates.
-- Read `docs/delivery-state.md` first, then only the artifacts required for the current phase. It is a navigation index, not a status authority.
-- Give delegated work an exact scope, artifact paths, and acceptance criteria. Do not invent provider-specific agent names or model IDs.
-- Do not implement before the applicable requirements and design gates. Require QA and review evidence before a merge.
-- Ask for current approval before commits, pushes, pull requests, merges, deployments, visibility changes, or other external side effects.
+Follow the shared gates, evidence standards, and approval boundaries exactly. Make routine implementation choices within an approved design; ask only when a material ambiguity affects scope, acceptance, architecture, safety, or an external side effect.
 
-## Codex skills
-
-Repository skills live in `.agents/skills/`. Use `$spin-up-team`, `$adopt-team`, `$resume-work`, `$sync-team`, `$retro`, or `$big-guns` for the named delivery operations. Use `$delivery-team` for general workflow routing.
+For automatic task routing, follow `delivery/execution.md` and select a native `.codex/agents/delivery-<tier>.toml` worker, passing the shared role path. These standalone profiles set model and reasoning effort for spawned agents. Select another tier profile to escalate; profile settings can override spawn settings. Preserve the user's main-session model. If custom agents/model selection are unavailable, follow the shared workflow on a capable available model and disclose the limitation.

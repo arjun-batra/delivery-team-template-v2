@@ -1,6 +1,6 @@
 # Delivery Team Workflow
 
-This is the provider-neutral source of truth. Claude Code and ChatGPT Codex adapters implement this workflow; neither may weaken its gates, verification, or approval rules.
+This is the provider-neutral contract. Runtime adapters may add provider mechanics, but may not weaken these gates, evidence, or approval rules. The authoritative operation and role procedures are indexed by `delivery/manifest.json`.
 
 ## Roles and artifacts
 
@@ -14,43 +14,31 @@ This is the provider-neutral source of truth. Claude Code and ChatGPT Codex adap
 | Reviewer | `docs/review-log.md` |
 | Release | `docs/runbook.md` and deployment configuration |
 
-Decisions belong in their owner’s artifact. A decision not recorded there did not happen.
+Read `docs/delivery-state.md` first. It is a navigation index; `docs/design/increment-plan.md` is the sole increment-status source. Decisions belong in their owner artifact.
 
-## Context and state
+## Execution
 
-Read `docs/delivery-state.md` first to locate the active phase and authoritative artifacts. Read only the documents relevant to that phase; reference requirement, acceptance-criterion, bug, and finding IDs rather than copying prose.
-
-`docs/design/increment-plan.md` is the only status source for increments. `docs/delivery-state.md` is a navigation index: it must point to the source of truth and never restate increment completion, QA verdicts, or reviewer verdicts.
+The coordinator follows `delivery/execution.md`: use the fewest useful workers and automatically select an appropriate model tier for each task. Shared role responsibilities and quality gates apply at every tier. Runtime profiles are configuration, not evidence of actual model use.
 
 ## Gates
 
-1. **Discovery:** establish users, outcome, scope, constraints, risks, and whether this is a small tool or product. The user explicitly approves proceeding.
-2. **Requirements:** write independently testable FR-NNN/NFR-NNN items. Ambiguity is a question, never an assumption. The user approves them.
-3. **Design:** map every requirement to acceptance criteria and ordered, end-to-end vertical increments. Identify unavailable verification environments before implementation. The user approves the plan.
-4. **Increment loop:** developer plans and builds one increment; QA runs regression and real-entry-point checks; reviewer checks changed scope and traceability. Resolve blockers before the next increment.
-5. **Closure:** QA performs end-to-end verification; reviewer performs a full audit; product accounts for every requirement; release verifies or dry-runs deployment when applicable.
+1. **Discovery:** establish users, outcome, scope, constraints, risks, and product/tool classification; obtain approval.
+2. **Requirements:** record independently testable FR-NNN/NFR-NNN items; ask about material ambiguity in scope, acceptance, or architecture; obtain approval.
+3. **Design:** map requirements to acceptance criteria and shippable vertical increments; identify unavailable verification environments; obtain approval.
+4. **Increment loop:** plan, build, QA, and reviewer clearance for each increment. Expand review to related contracts when an interface changes. Reconcile affected documentation after every pass and complete the documentation closeout before marking an increment done.
+5. **Closure:** end-to-end QA, full reviewer audit, product accounting, and release verification or dry run when applicable.
+
+## Documentation
+
+Follow `delivery/documentation.md` whenever creating or changing delivery artifacts. Write for a human reader: concise current facts, decisions, evidence, and next actions. Every role updates affected documents during its pass; the technical lead coordinates an automatic documentation closeout at each increment end, and the reviewer verifies it before clearance.
 
 ## Delivery rules
 
-- A small tool may use lite mode: one lead owns product and technical-lead artifacts; designer and release remain conditional; reviewer runs at closure. A product uses the full roles above.
-- Before Gate 3, verify every requirement claimed by an increment has a matching increment acceptance criterion. Route unavailable live-network, external-service, browser, or automation verification to the user once for a decision.
-- Each increment is a shippable vertical slice. Developer writes a short build plan, implements, runs the configured checks, and writes a handoff.
-- QA reports PASS or files bugs. After three fix cycles, escalate to the technical lead.
-- Reviewer audits files changed since its last clearance, validates claimed FR/NFR traceability, and carries forward recurring disclosed limitations as findings.
-- A change request updates requirements, design impact, and affected increments before implementation. Batch related changes where practical.
-- At closure, write 3–5 evidence-backed delivery lessons in `docs/retro.md`; propose template changes separately from project changes.
-
-## Verification and quality
-
-- Keep configurable values out of source code. For LLM projects, prompts and model parameters are configuration.
-- UI, layout, accessibility, and editability claims require live-artifact evidence, not only source inspection.
-- Execute artifacts that run outside tests, such as migrations, IaC, and deployment scripts, in an appropriate safe environment; re-run where idempotence matters.
-- Before declaring an increment ready, run CI-equivalent checks, the full suite, and a real entry-point smoke test.
-- Keep docs synchronized with Git. A contradiction is a defect to resolve before proceeding.
-- Keep active artifacts concise: QA retains the latest run and open bugs; reviewer retains open findings; owners archive only resolved entries in their own archives. Never use archives for ordinary task context.
-
-## Git and approval rules
-
-- Work on an increment branch when the project is not explicitly using the solo/low-stakes exception.
-- Commit code and the documentation it changes together after QA passes. Merge only after reviewer clearance.
-- Ask for current approval before any commit, push, pull request, merge, tag, deployment, visibility change, or other external side effect. No adapter may pre-approve these actions.
+- Lite mode may combine product and technical-lead ownership and omit conditional design/release work, but never skips QA. Reviewer clearance is required before every merge; a full audit is additionally required at closure.
+- A change request updates requirements, design impact, and affected increments before implementation.
+- QA reports PASS or files bugs; after three fix cycles, escalate to the technical lead.
+- Keep configuration out of source. For LLM work, prompts and model parameters are configuration.
+- UI, accessibility, layout, editability, migrations, IaC, and deployment claims need appropriate live-artifact evidence.
+- Before ready, verify configured CI-equivalent checks, the full suite, and a real-entry-point smoke test. Reuse valid evidence for the same revision, configuration, and environment; rerun affected checks after changes.
+- Keep active artifacts concise: current QA result/open bugs and open reviewer findings only. Archive resolved material outside ordinary task context.
+- Commit code and changed documentation together after QA passes. Ask for current approval before commit, push, PR, merge, tag, deployment, visibility change, or another external side effect.

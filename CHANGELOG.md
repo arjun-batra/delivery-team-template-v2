@@ -2,6 +2,10 @@
 
 All notable changes to the delivery-team-template are recorded here. Any template change bumps `VERSION` and adds an entry here — no silent template edits.
 
+## v2.1.2
+
+Added matching `/migrate-v1` and `$migrate-v1` operations for controlled upgrades of existing v1 installations. The workflow audit now supports both this template and downstream repositories that install its managed assets.
+
 ## v2.1.1
 
 Aligned Claude `/adopt-team` and `/sync-team` with their Codex equivalents: platform-neutral temporary workspaces, diff previews, protected project content, and approval before applying or committing changes.
