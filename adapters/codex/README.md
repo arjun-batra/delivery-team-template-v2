@@ -1,7 +1,16 @@
-# Codex adapter
+# ChatGPT Codex adapter
 
-Codex discovers the root `AGENTS.md` automatically. It supplies the shared workflow instructions and points to the repository skill at `.agents/skills/delivery-team/`.
+Codex discovers root `AGENTS.md` automatically. Repository skills live in `.agents/skills/` and provide the same named delivery operations as Claude commands.
 
-Start a new project by asking Codex to use the delivery-team workflow with the project idea. For an existing repository, ask it to adopt the workflow and reverse-document the current system before implementing changes.
+| Claude Code | ChatGPT Codex |
+|---|---|
+| `/spin-up-team` | `$spin-up-team` |
+| `/adopt-team` | `$adopt-team` |
+| `/resume-work` | `$resume-work` |
+| `/sync-team` | `$sync-team` |
+| `/retro` | `$retro` |
+| `/big-guns` | `$big-guns` |
 
-The adapter deliberately avoids fixed model names and provider-specific slash commands. Codex task creation, subagents, worktrees, and approvals remain controlled by the active Codex environment.
+Use `$delivery-team` for general routing. Skills preserve the shared workflow, artifacts, user gates, and approval rules while leaving task creation, models, worktrees, and permissions to the active Codex environment.
+
+A skill is discovered from `.agents/skills/`; restart Codex if newly added skills do not appear.
