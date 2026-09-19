@@ -28,6 +28,8 @@ See [the Codex adapter](adapters/codex/README.md) and [the Claude adapter](adapt
 
 The workflow is artifact-driven: requirements, design, increment status, test evidence, review findings, and runbooks live in `docs/`, not transient chat. The user approves discovery, requirements, and design before implementation. Each merge is an end-to-end vertical slice.
 
+Documentation stays concise and human-readable through the [shared documentation standard](delivery/documentation.md). Each role refreshes affected artifacts on every pass; each increment closes with an automatic documentation reconciliation and reviewer check.
+
 ## Safety and maintenance
 
 The template never pre-approves commits, pushes, pull requests, merges, deployments, or other external side effects. Update `WORKFLOW.md` before changing adapter behavior, then bump `VERSION` and add a `CHANGELOG.md` entry.

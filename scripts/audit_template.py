@@ -9,7 +9,7 @@ errors=[]
 def require(path):
     if not (ROOT/path).is_file(): errors.append(f"missing: {path}"); return False
     return True
-for path in ("AGENTS.md","CLAUDE.md","WORKFLOW.md","docs/delivery-state.md","delivery/manifest.json",".github/workflows/audit.yml",".agents/skills/delivery-team/SKILL.md"):
+for path in ("AGENTS.md","CLAUDE.md","WORKFLOW.md","docs/delivery-state.md","delivery/manifest.json","delivery/documentation.md",".github/workflows/audit.yml",".agents/skills/delivery-team/SKILL.md"):
     require(path)
 try:
     manifest=json.loads((ROOT/"delivery/manifest.json").read_text(encoding="utf-8"))
@@ -30,6 +30,11 @@ for agent,role in {"pm":"product","techlead":"technical-lead","designer":"design
     path=Path(".claude/agents")/(agent+".md"); procedure=manifest.get("roles",{}).get(role)
     if require(path) and procedure and procedure not in (ROOT/path).read_text(encoding="utf-8"):
         errors.append(f"Claude agent is not linked to shared role: {path}")
+# Structural linkage only; factual freshness is checked by the increment reviewer.
+for relative in ("WORKFLOW.md", "delivery/roles/developer.md", "delivery/roles/qa.md",
+                 "delivery/roles/reviewer.md", "delivery/roles/technical-lead.md"):
+    if require(relative) and "delivery/documentation.md" not in (ROOT/relative).read_text(encoding="utf-8"):
+        errors.append(f"missing shared documentation standard link: {relative}")
 is_template=all((ROOT/p).is_file() for p in ("README.md","CHANGELOG.md","VERSION"))
 if is_template and not re.fullmatch(r"\d+\.\d+\.\d+\n?",(ROOT/"VERSION").read_text(encoding="utf-8")):
     errors.append("VERSION must use semantic versioning (MAJOR.MINOR.PATCH)")

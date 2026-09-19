@@ -21,8 +21,12 @@ Read `docs/delivery-state.md` first. It is a navigation index; `docs/design/incr
 1. **Discovery:** establish users, outcome, scope, constraints, risks, and product/tool classification; obtain approval.
 2. **Requirements:** record independently testable FR-NNN/NFR-NNN items; ask about material ambiguity in scope, acceptance, or architecture; obtain approval.
 3. **Design:** map requirements to acceptance criteria and shippable vertical increments; identify unavailable verification environments; obtain approval.
-4. **Increment loop:** plan, build, QA, and reviewer clearance for each increment. Expand review to related contracts when an interface changes.
+4. **Increment loop:** plan, build, QA, and reviewer clearance for each increment. Expand review to related contracts when an interface changes. Reconcile affected documentation after every pass and complete the documentation closeout before marking an increment done.
 5. **Closure:** end-to-end QA, full reviewer audit, product accounting, and release verification or dry run when applicable.
+
+## Documentation
+
+Follow `delivery/documentation.md` whenever creating or changing delivery artifacts. Write for a human reader: concise current facts, decisions, evidence, and next actions. Every role updates affected documents during its pass; the technical lead coordinates an automatic documentation closeout at each increment end, and the reviewer verifies it before clearance.
 
 ## Delivery rules
 
