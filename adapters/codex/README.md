@@ -7,3 +7,6 @@ The coordinator follows `delivery/execution.md`. Native standalone profiles in `
 This requires a Codex runtime supporting standalone custom-agent TOML files and access to the selected models. Reload/restart if profiles are not discovered. Profile model/effort settings take precedence over spawn defaults. Verify runtime metadata where possible; report missing controls and use the capable current model instead of claiming a switch. These files do not change a plain ChatGPT chat's model or the user's main-session model.
 
 Configuration format: [official Codex subagent documentation](https://developers.openai.com/es-419/docs/agent-configuration/subagents).
+
+
+For non-trivial work, Codex must dispatch the workers required by `delivery/dispatch.md` and show their activity in the task. It does not wait for acknowledgement between routine internal phases.

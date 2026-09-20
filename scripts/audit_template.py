@@ -10,7 +10,7 @@ errors=[]
 def require(path):
     if not (ROOT/path).is_file(): errors.append(f"missing: {path}"); return False
     return True
-for path in ("AGENTS.md","CLAUDE.md","WORKFLOW.md","docs/delivery-state.md","delivery/manifest.json","delivery/documentation.md",".github/workflows/audit.yml",".agents/skills/delivery-team/SKILL.md"):
+for path in ("AGENTS.md","CLAUDE.md","WORKFLOW.md","docs/delivery-state.md","delivery/manifest.json","delivery/documentation.md","delivery/dispatch.md",".github/workflows/audit.yml",".agents/skills/delivery-team/SKILL.md"):
     require(path)
 try:
     manifest=json.loads((ROOT/"delivery/manifest.json").read_text(encoding="utf-8"))
@@ -38,11 +38,13 @@ for relative in ("WORKFLOW.md", "delivery/roles/developer.md", "delivery/roles/q
         errors.append(f"missing shared documentation standard link: {relative}")
 
 # Validate native profiles against the shared map; no remote model calls.
-for relative in ("delivery/execution.md", "delivery/worker.md", "delivery/model-routing.json"):
+for relative in ("delivery/execution.md", "delivery/worker.md", "delivery/model-routing.json", "delivery/dispatch.md"):
     require(relative)
-for relative in ("WORKFLOW.md", "AGENTS.md", "CLAUDE.md", ".claude/orchestrator-checklist.md"):
+for relative in ("WORKFLOW.md", "AGENTS.md", "CLAUDE.md", ".claude/orchestrator-checklist.md", ".agents/skills/delivery-team/SKILL.md"):
     if require(relative) and "delivery/execution.md" not in (ROOT/relative).read_text(encoding="utf-8"):
         errors.append(f"missing execution policy link: {relative}")
+    if require(relative) and "delivery/dispatch.md" not in (ROOT/relative).read_text(encoding="utf-8"):
+        errors.append(f"missing dispatch contract link: {relative}")
 for relative in (".codex/agents/", ".claude/agents/", "delivery/", ".claude/orchestrator-checklist.md"):
     if relative not in manifest.get("managed_paths", []):
         errors.append(f"routing assets not managed for installation: {relative}")
@@ -93,6 +95,16 @@ for provider in ("claude", "codex"):
             errors.append(f"name/model mismatch: {relative}")
         if not profile.get("description") or "delivery/worker.md" not in instructions:
             errors.append(f"missing description/worker contract: {relative}")
+
+if manifest.get("execution", {}).get("dispatch") != "delivery/dispatch.md":
+    errors.append("manifest must declare the shared dispatch contract")
+
+dispatch = (ROOT/"delivery/dispatch.md")
+if dispatch.is_file():
+    text = dispatch.read_text(encoding="utf-8")
+    for required in ("delivery/roles/developer.md", "delivery/roles/qa.md", "delivery/roles/reviewer.md", "Do not use the same worker thread"):
+        if required not in text:
+            errors.append(f"dispatch contract is missing required worker rule: {required}")
 
 is_template=all((ROOT/p).is_file() for p in ("README.md","CHANGELOG.md","VERSION","adapters/codex/README.md","adapters/claude/README.md"))
 if is_template and not re.fullmatch(r"\d+\.\d+\.\d+\n?",(ROOT/"VERSION").read_text(encoding="utf-8")):

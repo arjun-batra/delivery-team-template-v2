@@ -2,9 +2,13 @@
 
 The coordinator reads this before planning or delegating. Minimize total effort per accepted increment, including retries and review. A smaller model or more agents is not automatically cheaper.
 
+## Required dispatch
+
+Read `delivery/dispatch.md` before planning. Its non-trivial dispatch matrix is mandatory and takes priority over the default efficiency guidance below. The coordinator cannot decide to replace required developer, QA, or reviewer workers with itself. Use the trivial-change exception only when its definition is met and record the reason.
+
 ## Use only the agents needed
 
-- Default to one coordinator performing the active role. Roles define responsibilities, not a requirement to spawn a team. Delegate for independent verification, separable parallel work, or a substantial search/log task that would crowd the main context.
+- The coordinator integrates and routes work. For non-trivial increments, it dispatches the workers required by `delivery/dispatch.md`; for trivial changes, it may perform the active role itself.
 - Keep at most two workers active by default, and one writer per artifact. No recursive delegation. Keep the QA and reviewer passes; prefer a separate reviewer context, and disclose when only self-review is available.
 - Size increments as coherent, testable vertical slices. Avoid both tiny handoffs and oversized changes. Load only relevant role instructions, artifact sections, and affected contracts.
 - Search paths/symbols before reading whole files. Use scripts for deterministic checks. Return summaries plus evidence paths, preserving exit codes and full logs outside the prompt.
@@ -22,7 +26,7 @@ Use the active provider's mapping in `delivery/model-routing.json`; these are st
 
 Choose by task risk and ambiguity, not job title. High-risk tasks start at deep; never downgrade them to save tokens. A release role may delegate log collection to fast while retaining deployment judgment at standard/deep.
 
-For each substantive task, the coordinator automatically selects `delivery-fast`, `delivery-standard`, or `delivery-deep`. Pass the appropriate shared role path and task brief. Native profiles bind the model; the runtime adapter explains selection mechanics. Do not spawn for a trivial action solely to change models.
+For each substantive task, the coordinator selects the required `delivery-fast`, `delivery-standard`, or `delivery-deep` worker from `delivery/dispatch.md`. Pass the appropriate shared role path and task brief. Native profiles bind the model; the runtime adapter explains selection mechanics. Do not spawn for a trivial action solely to change models.
 
 A worker cannot promise to change its own running model. If the current tier cannot resolve a task after one failed reasoning/fix attempt, return a short escalation brief; the coordinator resumes the remaining work at the next capable tier. Reuse evidence and changes, never restart the investigation blindly. Do not escalate model size for a missing credential, network outage, or unavailable test environment. The existing three-cycle QA escalation remains the overall limit.
 

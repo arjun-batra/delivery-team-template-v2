@@ -32,6 +32,10 @@ The workflow is artifact-driven: requirements, design, increment status, test ev
 
 Documentation stays concise and human-readable through the [shared documentation standard](delivery/documentation.md). Each role refreshes affected artifacts on every pass; each increment closes with an automatic documentation reconciliation and reviewer check.
 
+## Required subagent workflow
+
+For non-trivial delivery work, the coordinator must spawn the shared-role workers defined in [the dispatch contract](delivery/dispatch.md): product/technical-design workers when needed, a developer for implementation, then separate QA and reviewer workers. The only coordinator-only exception is a trivial non-behavioral change. Codex and Claude report actual worker dispatch; they do not pause for routine internal handoffs or status acknowledgement.
+
 ## Efficient execution
 
 One coordinator is the default. It selects fast, standard, or deep workers for the task using the [execution policy](delivery/execution.md) and [model map](delivery/model-routing.json), with compact handoffs and evidence reuse. Native profiles configure model selection for Claude Code and compatible Codex subagent runtimes. Plain ChatGPT chats or runtimes without these controls cannot enforce automatic switching; account overrides can also change the model. The shared workflow still applies.
