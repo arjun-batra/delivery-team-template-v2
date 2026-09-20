@@ -36,6 +36,7 @@
   "execution": {
     "policy": "delivery/execution.md",
     "worker": "delivery/worker.md",
-    "models": "delivery/model-routing.json"
+    "models": "delivery/model-routing.json",
+    "dispatch": "delivery/dispatch.md"
   }
 }

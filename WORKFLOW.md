@@ -18,13 +18,13 @@ Read `docs/delivery-state.md` first. It is a navigation index; `docs/design/incr
 
 ## Execution
 
-The coordinator follows `delivery/execution.md`: use the fewest useful workers and automatically select an appropriate model tier for each task. Shared role responsibilities and quality gates apply at every tier. Runtime profiles are configuration, not evidence of actual model use.
+The coordinator follows `delivery/execution.md` and `delivery/dispatch.md`. Dispatch is mandatory for non-trivial work: product/technical-design workers when needed, developer for implementation, then separate QA and reviewer workers. The coordinator may handle only the narrow trivial-change exception. Shared role responsibilities and quality gates apply at every tier. Runtime profiles are configuration, not evidence of actual model use.
 
 ## Gates
 
-1. **Discovery:** establish users, outcome, scope, constraints, risks, and product/tool classification; obtain approval.
-2. **Requirements:** record independently testable FR-NNN/NFR-NNN items; ask about material ambiguity in scope, acceptance, or architecture; obtain approval.
-3. **Design:** map requirements to acceptance criteria and shippable vertical increments; identify unavailable verification environments; obtain approval.
+1. **Discovery:** establish users, outcome, scope, constraints, risks, and product/tool classification. Obtain approval for a new project or material scope decision; a clear bounded change request authorizes the discovery needed for that change.
+2. **Requirements:** record independently testable FR-NNN/NFR-NNN items; ask about material ambiguity in scope, acceptance, or architecture. Obtain approval before a new build or material requirement change; do not seek acknowledgement for routine refinement.
+3. **Design:** map requirements to acceptance criteria and shippable vertical increments; identify unavailable verification environments. Obtain approval for a new design or material architectural decision; proceed autonomously within an approved design.
 4. **Increment loop:** plan, build, QA, and reviewer clearance for each increment. Expand review to related contracts when an interface changes. Reconcile affected documentation after every pass and complete the documentation closeout before marking an increment done.
 5. **Closure:** end-to-end QA, full reviewer audit, product accounting, and release verification or dry run when applicable.
 

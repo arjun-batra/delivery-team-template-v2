@@ -2,6 +2,10 @@
 
 All notable changes to the delivery-team-template are recorded here. Any template change bumps `VERSION` and adds an entry here — no silent template edits.
 
+## v2.2.0
+
+Enforced functional subagent parity for non-trivial delivery work. The shared dispatch contract now requires role-specific developer, QA, and reviewer workers, routes product/design/release work when needed, records real dispatch evidence, and limits user pauses to material decisions or external side effects.
+
 ## v2.1.2
 
 Added matching `/migrate-v1` and `$migrate-v1` operations for controlled upgrades of existing v1 installations. The workflow audit now supports both this template and downstream repositories that install its managed assets.
