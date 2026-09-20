@@ -1,6 +1,6 @@
 # Claude delivery-team adapter
 
-Read `WORKFLOW.md` and `delivery/manifest.json` before delivery work. They are the provider-neutral source; load only the role or operation procedure needed for the current phase, plus `delivery/dispatch.md` for any delivery work.
+Read `WORKFLOW.md`, `delivery/execution.md`, and `delivery/manifest.json` before delivery work. They are the provider-neutral source; load only the role or operation procedure needed for the current phase, plus `delivery/dispatch.md` for any delivery work.
 
 Claude commands and Codex skills have identical names with `/` replaced by `$`: `spin-up-team`, `adopt-team`, `migrate-v1`, `resume-work`, `sync-team`, `retro`, and `big-guns`. Claude role adapters in `.claude/agents/` point to the same shared role procedures used by Codex.
 
